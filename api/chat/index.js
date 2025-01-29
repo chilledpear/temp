@@ -2,8 +2,12 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config(); // Load environment variables in local development
 }
 
-// ✅ Correct OpenAI Import (ESM-style for CommonJS)
-const OpenAI = require('openai').default; 
+// ✅ Correct OpenAI Import for Vercel
+const OpenAI = require('openai'); 
+
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY, // Make sure the API key is correctly set
+});
 
 module.exports = async (req, res) => {
     try {
@@ -42,13 +46,8 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'Invalid message format. Message must be a string.' });
         }
 
-        // ✅ Initialize OpenAI client (Fixed Import)
-        const openai = new OpenAI({
-            apiKey: process.env.OPENAI_API_KEY,
-        });
-
-        // Send request to OpenAI API
-        const completion = await openai.chat.completions.create({
+        // ✅ Correct way to call OpenAI API (Latest SDK)
+        const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
             messages: [
                 { role: "system", content: "You are a helpful assistant." },
@@ -57,10 +56,10 @@ module.exports = async (req, res) => {
         });
 
         // Debugging: Log OpenAI response
-        console.log("✅ OpenAI Response:", completion);
+        console.log("✅ OpenAI Response:", response);
 
         // Return response to frontend
-        res.status(200).json({ response: completion.choices[0].message.content });
+        res.status(200).json({ response: response.choices[0].message.content });
 
     } catch (error) {
         // Log detailed error for debugging
