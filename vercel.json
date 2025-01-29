@@ -1,12 +1,25 @@
 {
     "version": 2,
     "builds": [
-      { "src": "api/chat/index.js", "use": "@vercel/node" },
-      { "src": "package.json", "use": "@vercel/static-build", "config": { "distDir": "dist" } }
+      {
+        "src": "api/chat/index.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "dist" }
+      }
     ],
     "routes": [
-      { "src": "/api/chat", "dest": "/api/chat/index.js", "methods": ["POST", "OPTIONS"] },
-      { "src": "/(.*)", "dest": "/index.html" }
+      {
+        "src": "/api/chat",
+        "dest": "/api/chat/index.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
     ]
   }
   

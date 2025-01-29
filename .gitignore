@@ -29,3 +29,4 @@ Thumbs.db
 
 # Other cache
 .cache/
+.vercel
