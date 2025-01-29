@@ -1,0 +1,191 @@
+/* Global Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* General Styles */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden; /* Prevent scrolling */
+    background-color: rgb(26, 23, 23);
+    color: white;
+    font-family: Arial, sans-serif;
+    height: 100vh; /* Ensure the full height fits the screen */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Adjust to align the container properly */
+    min-height: 100vh;
+    padding: 0;
+}
+
+/* Main Container */
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px; /* Added padding for spacing */
+    margin: 40px auto; /* Add spacing around the container */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: linear-gradient(145deg, #1e1e1e, #292929); /* Subtle gradient background */
+    border-radius: 20px; /* Smooth rounded edges */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.1); /* Modern shadow */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Thin outer border */
+}
+
+/* Title Section */
+.title-container {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.image-text {
+    font-size: 32px; /* Reduced font size */
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    line-height: 1.2;
+}
+
+.contract-text {
+    font-size: 14px; /* Reduced font size */
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    margin-top: 5px;
+}
+
+/* Image Section */
+.image-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.center-image {
+    width: 100%;
+    max-width: 360px; /* Increased by 20% */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+/* Chat Box Section */
+.chat-box {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #222;
+    border: 1px solid #555;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat Display */
+.chat-display {
+    height: auto;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    max-height: 200px; /* Keeps chatbox proportional */
+    overflow-y: auto;
+}
+
+/* Input Section */
+.input-container {
+    display: flex;
+    gap: 5px;
+}
+
+#user-input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #444;
+    color: white;
+}
+
+#send-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+#send-btn:hover {
+    background-color: #666;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 5px;
+        gap: 5px;
+        margin: 20px auto; /* Adjust margin for smaller screens */
+    }
+
+    .image-text {
+        font-size: 24px; /* Smaller font size */
+    }
+
+    .contract-text {
+        font-size: 12px;
+    }
+
+    .center-image {
+        max-width: 260px; /* Increased size for mobile screens */
+    }
+
+    .chat-box {
+        min-height: auto;
+    }
+
+    .chat-display {
+        max-height: 150px; /* Prevents excessive blank space on mobile */
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .container {
+        gap: 5px;
+    }
+
+    .image-text {
+        font-size: 18px;
+    }
+
+    .contract-text {
+        font-size: 10px;
+    }
+
+    .center-image {
+        max-width: 200px; /* Further increase for smaller screens */
+    }
+
+    .chat-box {
+        min-height: auto;
+    }
+
+    .chat-display {
+        max-height: 120px; /* Prevent excessive blank space */
+        padding: 5px;
+    }
+}
