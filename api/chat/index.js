@@ -2,8 +2,8 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config(); // Load environment variables in local development
 }
 
-// ✅ Correct OpenAI Import
-const { OpenAI } = require('openai'); 
+// ✅ Correct OpenAI Import (ESM-style for CommonJS)
+const OpenAI = require('openai').default; 
 
 module.exports = async (req, res) => {
     try {
@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
             return res.status(400).json({ error: 'Invalid message format. Message must be a string.' });
         }
 
-        // ✅ Initialize OpenAI client (Fixed)
+        // ✅ Initialize OpenAI client (Fixed Import)
         const openai = new OpenAI({
             apiKey: process.env.OPENAI_API_KEY,
         });
