@@ -1,36 +1,23 @@
 import { useState } from "react";
-import "../assets/styles.css"; // Ensure the styles file is in the right path
+import "../assets/styles.css"; // Ensure the styles file is correctly linked
 
 const ChatApp = () => {
-  const [messages, setMessages] = useState([]); // Chat history
-  const [input, setInput] = useState(""); // User input
+  const [messages, setMessages] = useState([]); // Stores chat messages
+  const [input, setInput] = useState(""); // Stores user input
   const [loading, setLoading] = useState(false); // Loading state
 
   // Function to send a message
   const sendMessage = async () => {
-    if (!input.trim()) return; // Ignore empty input
+    if (!input.trim()) return; // Prevent empty input
 
     const userMessage = { sender: "User", text: input };
-    setMessages((prev) => [...prev, userMessage]); // Update chat history
+    setMessages((prev) => [...prev, userMessage]); // Add user message to chat history
     setInput(""); // Clear input field
     setLoading(true); // Show loading state
 
     try {
-      const baseUrl = window.location.origin; // Use correct URL dynamically
-      const response = await fetch(`${baseUrl}/api/chat`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: input }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      setMessages((prev) => [...prev, { sender: "Ling Ling AI", text: data.response }]);
+      const response = await fetchChatGPTResponse(input);
+      setMessages((prev) => [...prev, { sender: "Ling Ling AI", text: response }]);
     } catch (error) {
       console.error("❌ Error calling API:", error);
       setMessages((prev) => [...prev, { sender: "Ling Ling AI", text: "API request failed. Try again!" }]);
@@ -38,6 +25,30 @@ const ChatApp = () => {
       setLoading(false); // Hide loading state
     }
   };
+
+  // Function to fetch response from OpenAI API
+  async function fetchChatGPTResponse(userInput) {
+    try {
+      const baseUrl = window.location.origin; // Dynamically determine the API endpoint
+      const response = await fetch(`${baseUrl}/api/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userInput }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data.response;
+    } catch (error) {
+      console.error("❌ API Call Error:", error);
+      return "An error occurred. Try again.";
+    }
+  }
 
   return (
     <div className="container">

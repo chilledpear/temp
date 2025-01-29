@@ -30,3 +30,4 @@ Thumbs.db
 # Other cache
 .cache/
 .vercel
+.env*.local

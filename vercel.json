@@ -1,13 +1,14 @@
 {
     "version": 2,
-    "rewrites": [
+    "routes": [
       {
-        "source": "/api/chat",
-        "destination": "/api/chat/index.js"
+        "src": "/api/chat",
+        "dest": "/api/chat/index.js",
+        "methods": ["POST", "OPTIONS"]
       },
       {
-        "source": "/(.*)",
-        "destination": "/index.html"
+        "src": "/(.*)",
+        "dest": "/frontend/$1"
       }
     ]
   }
